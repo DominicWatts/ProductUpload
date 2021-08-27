@@ -40,6 +40,11 @@ class Import extends AbstractHelper
     protected $indexer;
 
     /**
+     * @var \Xigen\ProductUpload\Helper\Option
+     */
+    protected $option;
+
+    /**
      * Import constructor.
      * @param \Magento\Framework\App\Helper\Context $context
      * @param \Magento\Catalog\Api\Data\ProductInterfaceFactory $productInterfaceFactory
@@ -48,6 +53,7 @@ class Import extends AbstractHelper
      * @param \Magento\Customer\Model\GroupFactory $groupFactory
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
      * @param \Xigen\ProductUpload\Helper\Indexer $indexer
+     * @param \Xigen\ProductUpload\Helper\Option $option
      */
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
@@ -56,7 +62,8 @@ class Import extends AbstractHelper
         \Psr\Log\LoggerInterface $logger,
         \Magento\Customer\Model\GroupFactory $groupFactory,
         \Magento\Catalog\Model\ProductFactory $product,
-        \Xigen\ProductUpload\Helper\Indexer $indexer
+        \Xigen\ProductUpload\Helper\Indexer $indexer,
+        \Xigen\ProductUpload\Helper\Option $option
     ) {
         $this->productInterfaceFactory = $productInterfaceFactory;
         $this->productRepositoryInterface = $productRepositoryInterface;
@@ -64,6 +71,7 @@ class Import extends AbstractHelper
         $this->groupFactory = $groupFactory;
         $this->product = $product;
         $this->indexer = $indexer;
+        $this->option = $option;
         parent::__construct($context);
     }
 
