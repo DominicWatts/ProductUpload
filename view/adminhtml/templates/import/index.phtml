@@ -1,0 +1,85 @@
+
+<a href="<?= $block->escapeUrl($block->getViewFileUrl('Xigen_ProductUpload::template.csv'));?>" 
+   target="_blank"><?= $block->escapeHtml(__("CSV Template")); ?></a>
+
+<?php if ($block->isImports()): ?>
+
+    <form method="post" enctype="multipart/form-data">
+            <?=$block->getBlockHtml('formkey')?>
+            <fieldset class="admin__fieldset admin__fieldset-import-service">
+                <div class="fieldset admin__field">
+                    <label for="import_simple_products" class="admin__field-label">
+                        <span><?= $block->escapeHtmlAttr(__('Replace Product'))?></span>
+                    </label>
+                    <div class="admin__field-control">
+                        <button title="<?= $block->escapeHtmlAttr(__('Replace Product'))?>" 
+                                type="button" 
+                                class="action-default scalable import-replace" 
+                                data-ui-id="widget-button-0">
+                            <span><?= $block->escapeHtmlAttr(__('Replace Product'))?></span>
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+    </form>
+
+<?php else: ?>
+
+    <h4><?= $block->escapeHtmlAttr(__("Nothing awaiting processing")); ?></h4>
+    <br/>
+
+<?php endif; ?>
+
+<div class="output">
+    <h3><?= $block->escapeHtml(__('Import Output'))?></h3>
+    <fieldset class="admin__fieldset">
+        <div class="fieldset admin__field">
+            <label class="admin__field-label"><span><?= $block->escapeHtmlAttr(__('Message'))?></span></label>
+            <div class="admin__field-control">
+                <textarea id="ajaxResponse" class="admin__control-text" readonly="readonly" />
+                    <?= $block->escapeHtml(__("Output will go here")); ?>
+                </textarea>
+            </div>
+        </div>
+    </fieldset>
+</div>
+
+<script>
+require(['jquery', "mage/mage", 'jquery/ui', "loadingPopup"], function(jQuery){
+    (function ($) {
+        $('.import-replace').click(function(){
+            doRequest('replace');
+        });
+
+        function doRequest(productType) {
+            $('body').loadingPopup({
+                timeout: false
+            });
+            var ajaxRequest;
+            ajaxRequest = jQuery.ajax({
+                url: "<?= $block->escapeUrl($block->getUrl('*/*/ajax')); ?>?isAjax=true",
+                type: 'POST',
+                data: {form_key : window.FORM_KEY, type : productType},
+                dataType: 'json',
+                beforeSend: function () {
+                    jQuery('#loader').show();
+                }
+            });
+            
+            //Show successfully for submit message
+            ajaxRequest.done(function (response, textStatus, jqXHR) {
+                jQuery("#ajaxResponse").html(response.message);
+                jQuery('body').trigger('hideLoadingPopup');
+                if(response.process > 0) {
+                    doRequest(productType);
+                }
+            });
+            //On failure of request this function will be called
+            ajaxRequest.fail(function () {
+                jQuery("#ajaxResponse").html('Oops, An error occured, please try again later!');
+                jQuery('body').trigger('hideLoadingPopup');
+            });
+        }
+    })(jQuery);
+});
+</script>

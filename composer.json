@@ -1,0 +1,33 @@
+{
+    "name": "dominicwatts/productupload",
+    "description": "Product upload which extends beyond csv upload extension",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Dominic Xigen",
+            "email": "dominic@xigen.co.uk"
+        }
+    ],
+    "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://repo.magento.com/"
+        }
+    ],
+    "require": {
+        "dominicwatts/csvupload": "*",
+        "magento/framework": "*",
+        "php": ">=7.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Xigen\\ProductUpload\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}
