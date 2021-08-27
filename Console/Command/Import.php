@@ -2,7 +2,12 @@
 
 namespace Xigen\ProductUpload\Console\Command;
 
+use Magento\Framework\App\Area;
+use Magento\Framework\App\State;
+use Magento\Framework\Console\Cli;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Stdlib\DateTime\DateTime;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
@@ -75,9 +80,9 @@ class Import extends Command
      * @param \Xigen\CsvUpload\Helper\Import $csvImportHelper
      */
     public function __construct(
-        \Psr\Log\LoggerInterface $logger,
-        \Magento\Framework\App\State $state,
-        \Magento\Framework\Stdlib\DateTime\DateTime $dateTime,
+        LoggerInterface $logger,
+        State $state,
+        DateTime $dateTime,
         \Xigen\ProductUpload\Helper\Import $importHelper,
         \Xigen\CsvUpload\Helper\Import $csvImportHelper
     ) {
@@ -98,7 +103,7 @@ class Import extends Command
     ) {
         $this->input = $input;
         $this->output = $output;
-        $this->state->setAreaCode(\Magento\Framework\App\Area::AREA_GLOBAL);
+        $this->state->setAreaCode(Area::AREA_GLOBAL);
 
         $import = $input->getArgument(self::IMPORT_ARGUMENT) ?: false;
 
@@ -161,7 +166,10 @@ class Import extends Command
                 '[%1] Finish',
                 $this->dateTime->gmtDate()
             ));
+
+            return Cli::RETURN_SUCCESS;
         }
+        return Cli::RETURN_FAILURE;
     }
 
     /**

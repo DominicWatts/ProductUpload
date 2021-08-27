@@ -13,7 +13,6 @@ $finder = PhpCsFixer\Finder::create()
     ->in('Console')
     ->in('Controller')
     ->in('Helper')
-    ->in('Model')
     ->in('view')
     ->name('*.phtml');
 
