@@ -2,17 +2,17 @@
 
 namespace Xigen\ProductUpload\Console\Command;
 
-use Magento\Framework\Exception\LocalizedException;
-use Symfony\Component\Console\Command\Command;
+use Magento\Framework\App\Area;
+use Magento\Framework\App\State;
 use Magento\Framework\Console\Cli;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Stdlib\DateTime\DateTime;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Psr\Log\LoggerInterface;
-use Magento\Framework\App\State;
-use Magento\Framework\Stdlib\DateTime\DateTime;
-use Magento\Framework\App\Area;
 
 /**
  * Import console

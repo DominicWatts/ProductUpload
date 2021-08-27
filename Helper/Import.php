@@ -113,7 +113,7 @@ class Import extends AbstractHelper
      * @param array $csvData
      * @return void
      */
-    public function updateAttributeData($csvData = [])
+    public function updateAttributeData($csvData = []) // phpcs:ignore
     {
         $productIds = [];
         foreach ($csvData as $csvRow) {
@@ -131,7 +131,8 @@ class Import extends AbstractHelper
                         $attributeCode != 'visibility' &&
                         $attributeCode != 'status' &&
                         $attributeCode != 'country_of_manufacture' &&
-                        ($attribute->getFrontendInput() == 'multiselect' || $attribute->getFrontendInput() == 'select')) {
+                        ($attribute->getFrontendInput() == 'multiselect' ||
+                         $attribute->getFrontendInput() == 'select')) {
                         $optionIds = [];
 
                         $values = explode(",", $value);
