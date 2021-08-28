@@ -138,7 +138,13 @@ class Import extends AbstractHelper
                         $values = explode(",", $value);
 
                         foreach ($values as $val) {
-                            $optionId = $this->option->createOrGetId($attributeCode, trim((string) $val));
+                            $string = trim((string) $val);
+                            try {
+                                $optionId = $this->option->createOrGetId($attributeCode, $string);
+                            } catch(\Exception $e) {
+                                $optionId = $attribute->getSource()->getOptionId($string);
+                            }
+  
                             if ($optionId) {
                                 $optionIds[] = $optionId;
                             }
