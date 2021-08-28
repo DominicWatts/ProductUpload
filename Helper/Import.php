@@ -141,10 +141,10 @@ class Import extends AbstractHelper
                             $string = trim((string) $val);
                             try {
                                 $optionId = $this->option->createOrGetId($attributeCode, $string);
-                            } catch(\Exception $e) {
+                            } catch (\Exception $e) {
                                 $optionId = $attribute->getSource()->getOptionId($string);
                             }
-  
+
                             if ($optionId) {
                                 $optionIds[] = $optionId;
                             }
