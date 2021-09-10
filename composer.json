@@ -3,7 +3,7 @@
     "description": "Product upload which extends beyond csv upload extension",
     "type": "magento2-module",
     "license": "proprietary",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "authors": [
         {
             "name": "Dominic Xigen",
