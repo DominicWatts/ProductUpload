@@ -25,7 +25,7 @@ Once import queue has been built product can be inserted a couple of ways
 
 ## Submit screen ##
 
-![Submit](https://i.snipboard.io/oadeSf.jpg)
+![Submit](https://i2.paste.pics/71f5a6a998f77c50980373a8eebae85f.png)
 
 ## Console commnad ## 
 
